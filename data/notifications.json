@@ -1,9 +1,18 @@
 [
   {
+    "id": "Nde7bace7",
+    "email": "demo@cacao.nl",
+    "tijd": "2026-06-15 00:55",
+    "gelezen": false,
+    "type": "bestelling",
+    "titel": "Bestelling geannuleerd",
+    "tekst": "Je bestelling ORD-1007 is geannuleerd."
+  },
+  {
     "id": "Nf4ffb9e5",
     "email": "demo@cacao.nl",
     "tijd": "2026-06-14 18:46",
-    "gelezen": false,
+    "gelezen": true,
     "type": "bestelling",
     "titel": "Bestelling geplaatst",
     "tekst": "Je bestelling ORD-1007 van EUR 5,75 is ontvangen en wordt verwerkt."

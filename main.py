@@ -787,6 +787,49 @@ def api_chat():
 # HOOFD-ROUTE: serveer login- of app-pagina
 # ---------------------------------------------------------------------------
 
+@app.route("/api/order/cancel", methods=["POST"])
+def api_order_cancel():
+    """Annuleer een bestelling (indien nog mogelijk)."""
+    email = current_user()
+    if not email:
+        return jsonify({"ok": False, "fout": "Niet ingelogd."}), 401
+    data = request.get_json(silent=True) or {}
+    order_id = data.get("id")
+    orders = load_json("orders", [])
+    found = None
+    for o in orders:
+        if o.get("id") == order_id and o.get("email") == email:
+            found = o
+            break
+    if not found:
+        return jsonify({"ok": False, "fout": "Bestelling niet gevonden."})
+    if found.get("status") in ("Bezorgd", "Geannuleerd"):
+        return jsonify({"ok": False, "fout": "Deze bestelling kan niet meer worden geannuleerd."})
+    found["status"] = "Geannuleerd"
+    save_json("orders", orders)
+    add_notification(email, "bestelling", "Bestelling geannuleerd",
+                     "Je bestelling " + str(order_id) + " is geannuleerd.")
+    return jsonify({"ok": True})
+
+
+@app.route("/api/unregister-product", methods=["POST"])
+def api_unregister_product():
+    """Verwijder een product uit de persoonlijke collectie."""
+    email = current_user()
+    if not email:
+        return jsonify({"ok": False, "fout": "Niet ingelogd."}), 401
+    data = request.get_json(silent=True) or {}
+    code = (data.get("code") or "").strip().upper()
+    registered = load_json("registered", {})
+    user_list = registered.get(email, [])
+    new_list = [r for r in user_list if r.get("code") != code]
+    if len(new_list) == len(user_list):
+        return jsonify({"ok": False, "fout": "Dit product staat niet in je collectie."})
+    registered[email] = new_list
+    save_json("registered", registered)
+    return jsonify({"ok": True})
+
+
 @app.route("/")
 def index():
     if current_user():
@@ -867,11 +910,11 @@ LOGIN_HTML = r"""<!DOCTYPE html>
 """ + SHARED_CSS + r"""
 .screen{justify-content:flex-start;background:
   radial-gradient(900px 500px at 50% 0%, #FFFDF8 0%, var(--creme-2) 55%);}
-.login-body{flex:1;display:flex;flex-direction:column;justify-content:flex-start;
-  padding:24px 26px 30px;overflow-y:auto}
+.login-body{flex:1;display:flex;flex-direction:column;justify-content:center;
+  padding:18px 26px 24px;overflow-y:auto}
 .login-body::-webkit-scrollbar{width:0}
-.brand{text-align:center;margin-bottom:20px}
-.brand img{width:138px;height:auto;display:block;margin:0 auto;
+.brand{text-align:center;margin-bottom:16px}
+.brand img{width:104px;height:auto;display:block;margin:0 auto;
   filter:drop-shadow(0 10px 22px rgba(62,39,35,.22))}
 .brand .tag{color:var(--goud);font-size:11.5px;letter-spacing:4px;text-transform:uppercase;margin-top:12px;font-weight:700}
 .login-card{background:var(--wit);border-radius:24px;padding:20px 18px;box-shadow:0 14px 34px rgba(62,39,35,.12);border:1px solid #F1E8D6}
@@ -935,7 +978,6 @@ input:focus{border-color:var(--goud);box-shadow:0 0 0 3px rgba(194,162,76,.16)}
         <button class="btn" onclick="doRegister()">Account aanmaken</button>
       </div>
       <div id="fout" class="foutmelding"></div>
-      <div class="demo-hint">Demo-account &middot; <b>demo@cacao.nl</b> / <b>demo123</b></div>
       </div>
     </div>
     <div class="home-indicator"></div>
@@ -1049,6 +1091,7 @@ h2.sectie:first-child{margin-top:2px}
 .st-opgelost{background:#E7F0E6;color:var(--groen)}
 .st-verwerking{background:#FBEFDF;color:var(--oranje)}
 .st-bezorgd{background:#E7F0E6;color:var(--groen)}
+.st-geannuleerd{background:#F3E7E4;color:var(--rood)}
 .btn{padding:15px;border:none;border-radius:15px;cursor:pointer;width:100%;
   background:linear-gradient(135deg,var(--bruin),var(--bruin-3));color:#F8EFDD;
   font-size:15px;font-weight:600;box-shadow:0 8px 20px rgba(62,39,35,.28);transition:transform .15s}
@@ -1056,6 +1099,7 @@ h2.sectie:first-child{margin-top:2px}
 .btn:active{transform:translateY(0)}
 .btn.goud{background:linear-gradient(135deg,var(--goud),#A8843A);color:#fff}
 .btn.licht{background:var(--creme);color:var(--bruin);box-shadow:none;border:1.5px solid #E6DCC9}
+.btn.rood-licht{background:#F7ECEA;color:var(--rood);box-shadow:none;border:1.5px solid #EAD2CC}
 .btn.klein{width:auto;padding:9px 16px;font-size:13px;border-radius:12px}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 label{display:block;font-size:12.5px;font-weight:600;color:var(--bruin-2);margin:13px 0 6px}
@@ -1313,7 +1357,7 @@ function el(id){return document.getElementById(id);}
 function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML;}
 function statusClass(s){var m={'Goed':'st-goed','Bijna verlopen':'st-bijna','Verlopen':'st-verlopen',
   'Ontvangen':'st-ontvangen','In behandeling':'st-behandeling','Opgelost':'st-opgelost',
-  'In verwerking':'st-verwerking','Bezorgd':'st-bezorgd'};return m[s]||'st-ontvangen';}
+  'In verwerking':'st-verwerking','Bezorgd':'st-bezorgd','Geannuleerd':'st-geannuleerd'};return m[s]||'st-ontvangen';}
 function toast(msg){var t=el('toast');t.textContent=msg;t.classList.add('show');
   clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},2200);}
 async function api(url,body){var opt={headers:{'Content-Type':'application/json'}};
@@ -1351,13 +1395,6 @@ function renderHome(){
   h+='<div class="home-greet"><div class="hg-hi">Welkom terug</div>'+
      '<div class="hg-name">Hallo, '+esc(voornaam)+'</div>'+
      '<div class="hg-sub">'+esc(datum)+'</div></div>';
-  /* snelle acties */
-  h+='<div class="qa">'+
-     qaTile('camera','Scannen','gaNaar(\'scan\')')+
-     qaTile('bag','Shop','gaNaar(\'shop\')')+
-     qaTile('box','Collectie','openCollectie()')+
-     qaTile('chat','Assistent','gaNaar(\'chat\')')+
-     '</div>';
   /* attentie: bijna verlopen */
   if(s.bijna_verlopen.length){
     h+='<div class="alert-card" onclick="openCollectie()"><div class="ai">'+ic('clock')+'</div>'+
@@ -1423,7 +1460,7 @@ function openProduct(code){
     '<div class="info-rij"><div class="lbl">Allergenen</div><div class="val">'+inlineIc("alert","warn")+' '+esc(p.allergenen)+'</div></div>'+
     '<div class="info-rij"><div class="lbl">Houdbaarheid</div><div class="val">'+esc(p.houdbaarheid)+'</div></div>'+
     '<div style="margin-top:20px;display:flex;flex-direction:column;gap:10px">';
-  if(inCollectie){h+='<button class="btn licht" disabled>\u2713 In je collectie</button>';}
+  if(inCollectie){h+='<button class="btn licht" disabled>\u2713 In je collectie</button>';h+='<button class="btn rood-licht" onclick="verwijderUitCollectie(\''+code+'\')">Verwijderen uit collectie</button>';}
   else{h+='<button class="btn goud" onclick="registreerProduct(\''+code+'\')">+ Toevoegen aan collectie</button>';}
   h+='<button class="btn" onclick="voegToeAanCart(\''+code+'\');toast(\'Toegevoegd aan winkelwagen\')">In winkelwagen \u2013 '+euro(p.prijs)+'</button></div>';
   openOverlay('Productinformatie',h);
@@ -1441,7 +1478,10 @@ function renderScan(){
     '<div id="scan-fout" style="color:var(--rood);font-size:13px;margin-top:8px;display:none"></div>'+
     '<button class="btn goud" style="margin-top:16px" onclick="doScan()">'+btnIc("search")+'Scan / Zoek product</button>'+
     '<div class="muted" style="text-align:center;margin-top:14px">Demo-codes: CACAO-001 t/m CACAO-008</div>'+
-    '<div id="scan-resultaat" style="margin-top:18px"></div>';
+    '<div id="scan-resultaat" style="margin-top:18px"></div>'+
+    '<div class="divider"></div>'+
+    '<button class="btn licht" onclick="toggleProductLijst()">'+btnIc("box")+'Kies een product uit de lijst</button>'+
+    '<div id="prod-lijst" style="margin-top:14px;display:none"></div>';
   el('scherm').innerHTML=h;
 }
 async function doScan(){
@@ -1635,6 +1675,9 @@ function openOrder(id){
     '<div class="r" style="font-weight:700;color:var(--bruin)">'+euro(it.prijs*it.aantal)+'</div></div>';});
   h+='<div class="totaal-rij"><span>Totaal</span><span>'+euro(o.totaal)+'</span></div></div>';
   h+='<h2 class="sectie">Bezorgadres</h2><div class="kaart"><div class="val">'+inlineIc("pin")+' '+esc(o.adres)+'</div></div>';
+  if(o.status!=='Bezorgd'&&o.status!=='Geannuleerd'){
+    h+='<button class="btn rood-licht" style="margin-top:6px" onclick="annuleerOrder(\''+o.id+'\')">Bestelling annuleren</button>';
+  }
   openOverlay('Bestelling',h);
 }
 function openKlachtForm(){
@@ -1693,6 +1736,28 @@ async function wijzigKlachtStatus(id,status){var d=await api('/api/complaint/sta
   if(d.ok){await laadState();toast('Status: '+status);openKlacht(id);}else toast(d.fout);}
 async function uitloggen(){await api('/api/logout',{});location.href='/';}
 
+async function verwijderUitCollectie(code){
+  var d=await api('/api/unregister-product',{code:code});
+  if(d.ok){toast('Verwijderd uit je collectie');await laadState();openProduct(code);}else toast(d.fout);
+}
+async function annuleerOrder(id){
+  var d=await api('/api/order/cancel',{id:id});
+  if(d.ok){toast('Bestelling geannuleerd');await laadState();openOrder(id);}else toast(d.fout);
+}
+function toggleProductLijst(){
+  var c=el('prod-lijst'); if(!c) return;
+  if(c.style.display==='none'){
+    var h='';
+    STATE.products.forEach(function(p){
+      var inC=STATE.registered.some(function(r){return r.code===p.code;});
+      h+='<div class="kaart li" onclick="openProduct(\''+p.code+'\')"><div class="ic">'+prodImg(p)+'</div>'+
+         '<div class="mid"><div class="t">'+esc(p.naam)+'</div><div class="s">'+esc(p.code)+' \u00B7 '+esc(p.categorie)+'</div></div>'+
+         '<div class="r">'+(inC?'<span class="status st-goed">In collectie</span>':ic('chevR'))+'</div></div>';
+    });
+    c.innerHTML=h; c.style.display='block';
+  } else { c.style.display='none'; }
+}
+
 /* ============== START ============== */
 function sizeDevice(){var d=document.querySelector('.device');if(!d)return;var r=9/16;var mh=window.innerHeight*0.97,mw=window.innerWidth*0.97;var h=Math.min(mh,940),w=h*r;if(w>mw){w=mw;h=w/r;}d.style.height=Math.round(h)+'px';d.style.width=Math.round(w)+'px';}
 sizeDevice(); window.addEventListener('resize',sizeDevice);
@@ -1708,10 +1773,13 @@ klok(); setInterval(klok,10000);
 
 if __name__ == "__main__":
     seed_if_empty()
-    print("=" * 56)
-    print("  Cacao Company draait nu!")
-    print("  Open in je browser:  http://127.0.0.1:5000")
+    print("=" * 60)
+    print("  >>> CACAO COMPANY - VERSIE 2 <<<")
+    print("  (login-fix, geen demo-tekst, annuleren, collectie")
+    print("   verwijderen, scan-productlijst, ratio 9:16)")
+    print("  Open in je browser:  http://127.0.0.1:5050")
     print("  Demo-login: demo@cacao.nl / demo123")
     print("  Stoppen: druk op Ctrl + C")
-    print("=" * 56)
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    print("=" * 60)
+    # debug=True zorgt dat de app automatisch herlaadt als je main.py opslaat.
+    app.run(host="127.0.0.1", port=5050, debug=True)
