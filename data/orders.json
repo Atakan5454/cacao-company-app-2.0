@@ -68,5 +68,53 @@
     "totaal": 6.25,
     "adres": "teststraat 123",
     "status": "In verwerking"
+  },
+  {
+    "id": "ORD-1005",
+    "email": "demo@cacao.nl",
+    "datum": "14-06-2026",
+    "items": [
+      {
+        "code": "CACAO-004",
+        "naam": "Sea Salt Caramel Tablet",
+        "aantal": 1,
+        "prijs": 5.25
+      }
+    ],
+    "totaal": 5.25,
+    "adres": "teststraat 123",
+    "status": "In verwerking"
+  },
+  {
+    "id": "ORD-1006",
+    "email": "demo@cacao.nl",
+    "datum": "14-06-2026",
+    "items": [
+      {
+        "code": "CACAO-008",
+        "naam": "White Chocolate Pistachio",
+        "aantal": 1,
+        "prijs": 6.25
+      }
+    ],
+    "totaal": 6.25,
+    "adres": "teststraat 123",
+    "status": "In verwerking"
+  },
+  {
+    "id": "ORD-1007",
+    "email": "demo@cacao.nl",
+    "datum": "14-06-2026",
+    "items": [
+      {
+        "code": "CACAO-003",
+        "naam": "Ecuador Single Origin 85%",
+        "aantal": 1,
+        "prijs": 5.75
+      }
+    ],
+    "totaal": 5.75,
+    "adres": "teststraat 123",
+    "status": "In verwerking"
   }
 ]
