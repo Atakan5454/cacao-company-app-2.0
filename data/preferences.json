@@ -1,0 +1,8 @@
+{
+  "demo@cacao.nl": {
+    "notif_bestelling": true,
+    "notif_klacht": true,
+    "notif_houdbaarheid": true,
+    "notif_aanbeveling": true
+  }
+}

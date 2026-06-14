@@ -1,0 +1,14 @@
+{
+  "demo@cacao.nl": {
+    "email": "demo@cacao.nl",
+    "naam": "Lionel Messi",
+    "wachtwoord": "0260a91e73b4a91204752c539f55e5f568d07224b78d3c97c7910680ce94a547",
+    "allergieen": [
+      "Noten"
+    ],
+    "favorieten": [
+      "Puur",
+      "Caramel"
+    ]
+  }
+}

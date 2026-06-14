@@ -1,0 +1,98 @@
+[
+  {
+    "code": "CACAO-001",
+    "naam": "Cacao Company Noir 72%",
+    "prijs": 4.95,
+    "categorie": "Puur",
+    "emoji": "🍫",
+    "ingredienten": "Cacaomassa, rietsuiker, cacaoboter, vanille",
+    "allergenen": "Kan sporen van noten en melk bevatten",
+    "herkomst": "Ghana (West-Afrika)",
+    "houdbaarheid": "12 maanden",
+    "beschrijving": "Intense pure chocolade met 72% cacao. Diepe tonen van geroosterde cacao en een fluweelzachte afdronk."
+  },
+  {
+    "code": "CACAO-002",
+    "naam": "Madagascar Vanilla Milk",
+    "prijs": 4.5,
+    "categorie": "Melk",
+    "emoji": "🍫",
+    "ingredienten": "Volle melkpoeder, rietsuiker, cacaoboter, cacaomassa, Bourbon-vanille",
+    "allergenen": "Bevat melk. Kan sporen van noten bevatten",
+    "herkomst": "Madagascar",
+    "houdbaarheid": "10 maanden",
+    "beschrijving": "Romige melkchocolade verfijnd met echte Bourbon-vanille uit Madagascar."
+  },
+  {
+    "code": "CACAO-003",
+    "naam": "Ecuador Single Origin 85%",
+    "prijs": 5.75,
+    "categorie": "Puur",
+    "emoji": "🍫",
+    "ingredienten": "Cacaomassa, cacaoboter, rietsuiker",
+    "allergenen": "Kan sporen van noten en melk bevatten",
+    "herkomst": "Ecuador (Arriba Nacional)",
+    "houdbaarheid": "14 maanden",
+    "beschrijving": "Single origin reep met krachtige 85% cacao. Florale tonen en een lange, rijke afdronk."
+  },
+  {
+    "code": "CACAO-004",
+    "naam": "Sea Salt Caramel Tablet",
+    "prijs": 5.25,
+    "categorie": "Caramel",
+    "emoji": "🧂",
+    "ingredienten": "Melkchocolade, karamelvulling, zeezout, cacaoboter, rietsuiker",
+    "allergenen": "Bevat melk. Kan sporen van noten bevatten",
+    "herkomst": "Belgie (productie) / Ghana (cacao)",
+    "houdbaarheid": "9 maanden",
+    "beschrijving": "Zachte karamel met een vleugje Bretons zeezout in romige melkchocolade."
+  },
+  {
+    "code": "CACAO-005",
+    "naam": "Ruby Raspberry Crunch",
+    "prijs": 5.5,
+    "categorie": "Ruby",
+    "emoji": "🍓",
+    "ingredienten": "Ruby cacao, rietsuiker, cacaoboter, melkpoeder, gevriesdroogde framboos",
+    "allergenen": "Bevat melk. Kan sporen van noten bevatten",
+    "herkomst": "Ivoorkust",
+    "houdbaarheid": "8 maanden",
+    "beschrijving": "Natuurlijke roze ruby-chocolade met fris-fruitige framboos en een knapperige crunch."
+  },
+  {
+    "code": "CACAO-006",
+    "naam": "Vegan Oat Mylk Chocolate",
+    "prijs": 5.95,
+    "categorie": "Vegan",
+    "emoji": "🌿",
+    "ingredienten": "Cacaomassa, haverdrankpoeder, kokosbloesemsuiker, cacaoboter",
+    "allergenen": "Bevat haver (gluten). Kan sporen van noten bevatten",
+    "herkomst": "Peru",
+    "houdbaarheid": "11 maanden",
+    "beschrijving": "100% plantaardige 'melk'chocolade op basis van haver. Romig, duurzaam en zuivelvrij."
+  },
+  {
+    "code": "CACAO-007",
+    "naam": "Hazelnut Praline Gold",
+    "prijs": 6.5,
+    "categorie": "Praline",
+    "emoji": "🌰",
+    "ingredienten": "Melkchocolade, hazelnootpraline, cacaoboter, rietsuiker",
+    "allergenen": "Bevat melk en hazelnoten",
+    "herkomst": "Italie (Piemonte hazelnoten)",
+    "houdbaarheid": "7 maanden",
+    "beschrijving": "Luxe praline met geroosterde Piemonte-hazelnoten, afgewerkt met goudglans."
+  },
+  {
+    "code": "CACAO-008",
+    "naam": "White Chocolate Pistachio",
+    "prijs": 6.25,
+    "categorie": "Wit",
+    "emoji": "🥜",
+    "ingredienten": "Cacaoboter, melkpoeder, rietsuiker, pistache",
+    "allergenen": "Bevat melk en pistachenoten",
+    "herkomst": "Turkije (pistache) / Belgie (productie)",
+    "houdbaarheid": "8 maanden",
+    "beschrijving": "Zachte witte chocolade met geroosterde pistache. Subtiel zoet en romig."
+  }
+]

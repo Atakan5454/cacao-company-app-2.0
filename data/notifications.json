@@ -1,0 +1,56 @@
+[
+  {
+    "id": "N20d3e27a",
+    "email": "demo@cacao.nl",
+    "tijd": "2026-06-14 17:08",
+    "gelezen": false,
+    "type": "klacht",
+    "titel": "Klachtstatus gewijzigd",
+    "tekst": "De status van klacht KL-2001 is nu: Opgelost."
+  },
+  {
+    "id": "Nb50d577b",
+    "email": "demo@cacao.nl",
+    "tijd": "2026-06-14 17:08",
+    "gelezen": false,
+    "type": "bestelling",
+    "titel": "Bestelling geplaatst",
+    "tekst": "Je bestelling ORD-1003 van EUR 4,95 is ontvangen en wordt verwerkt."
+  },
+  {
+    "id": "N6f634a3c",
+    "email": "demo@cacao.nl",
+    "tijd": "2026-06-14 17:01",
+    "gelezen": false,
+    "type": "bestelling",
+    "titel": "Bestelling geplaatst",
+    "tekst": "Je bestelling ORD-1002 van EUR 4,95 is ontvangen en wordt verwerkt."
+  },
+  {
+    "id": "N1",
+    "email": "demo@cacao.nl",
+    "tijd": "2026-06-14 17:00",
+    "gelezen": true,
+    "type": "houdbaarheid",
+    "titel": "Product bijna verlopen",
+    "tekst": "Je Ruby Raspberry Crunch verloopt binnenkort. Geniet er snel van!"
+  },
+  {
+    "id": "N2",
+    "email": "demo@cacao.nl",
+    "tijd": "2026-06-14 17:00",
+    "gelezen": true,
+    "type": "aanbeveling",
+    "titel": "Nieuw voor jou",
+    "tekst": "Op basis van je voorkeuren raden we de Ecuador Single Origin 85% aan."
+  },
+  {
+    "id": "N3",
+    "email": "demo@cacao.nl",
+    "tijd": "2026-06-14 17:00",
+    "gelezen": true,
+    "type": "klacht",
+    "titel": "Klacht in behandeling",
+    "tekst": "Je klacht KL-2001 wordt momenteel behandeld door onze klantenservice."
+  }
+]

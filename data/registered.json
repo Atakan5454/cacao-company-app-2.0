@@ -1,0 +1,19 @@
+{
+  "demo@cacao.nl": [
+    {
+      "code": "CACAO-001",
+      "geregistreerd": "25-05-2026",
+      "verloopt": "12-10-2026"
+    },
+    {
+      "code": "CACAO-004",
+      "geregistreerd": "15-04-2026",
+      "verloopt": "24-06-2026"
+    },
+    {
+      "code": "CACAO-005",
+      "geregistreerd": "05-04-2026",
+      "verloopt": "18-06-2026"
+    }
+  ]
+}
