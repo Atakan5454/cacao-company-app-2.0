@@ -1,9 +1,18 @@
 [
   {
+    "id": "Naca3112f",
+    "email": "demo@cacao.nl",
+    "tijd": "2026-06-14 18:10",
+    "gelezen": false,
+    "type": "bestelling",
+    "titel": "Bestelling geplaatst",
+    "tekst": "Je bestelling ORD-1004 van EUR 6,25 is ontvangen en wordt verwerkt."
+  },
+  {
     "id": "N20d3e27a",
     "email": "demo@cacao.nl",
     "tijd": "2026-06-14 17:08",
-    "gelezen": false,
+    "gelezen": true,
     "type": "klacht",
     "titel": "Klachtstatus gewijzigd",
     "tekst": "De status van klacht KL-2001 is nu: Opgelost."
@@ -12,7 +21,7 @@
     "id": "Nb50d577b",
     "email": "demo@cacao.nl",
     "tijd": "2026-06-14 17:08",
-    "gelezen": false,
+    "gelezen": true,
     "type": "bestelling",
     "titel": "Bestelling geplaatst",
     "tekst": "Je bestelling ORD-1003 van EUR 4,95 is ontvangen en wordt verwerkt."
@@ -21,7 +30,7 @@
     "id": "N6f634a3c",
     "email": "demo@cacao.nl",
     "tijd": "2026-06-14 17:01",
-    "gelezen": false,
+    "gelezen": true,
     "type": "bestelling",
     "titel": "Bestelling geplaatst",
     "tekst": "Je bestelling ORD-1002 van EUR 4,95 is ontvangen en wordt verwerkt."

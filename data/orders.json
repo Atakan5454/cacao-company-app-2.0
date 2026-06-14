@@ -52,5 +52,21 @@
     "totaal": 4.95,
     "adres": "teststraat 123",
     "status": "In verwerking"
+  },
+  {
+    "id": "ORD-1004",
+    "email": "demo@cacao.nl",
+    "datum": "14-06-2026",
+    "items": [
+      {
+        "code": "CACAO-008",
+        "naam": "White Chocolate Pistachio",
+        "aantal": 1,
+        "prijs": 6.25
+      }
+    ],
+    "totaal": 6.25,
+    "adres": "teststraat 123",
+    "status": "In verwerking"
   }
 ]
